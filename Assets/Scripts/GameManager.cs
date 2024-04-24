@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button validationButton;
 
     private int _currentLevelIndex = -1;
-    private Vector2 _angleRange;
+    private Vector2 _angleRange;   
 
     private void Awake()
     {
@@ -23,13 +23,20 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        validationButton.onClick.AddListener(TryResolution);
+        if (validationButton != null)
+        {
+            validationButton.onClick.AddListener(CheckLevelCompletion);
+        }
+
         SetNextLevel();
     }
 
     private void OnDestroy()
     {
-        validationButton.onClick.RemoveAllListeners();
+        if (validationButton != null)
+        {
+            validationButton.onClick.RemoveAllListeners();
+        }
     }
 
     private void SetNextLevel()
@@ -38,10 +45,12 @@ public class GameManager : MonoBehaviour
         {
             _currentLevelIndex++;
             ComputeAngleForLevel();
+            PinManager.Instance.SetRotationFeasibility(true);
             return;
         }
 
         Debug.Log("You completed all the levels !");
+        // animation/feedback
     }
 
     private void ComputeAngleForLevel()
@@ -55,22 +64,20 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Starting new level: difficulty = {difficulty.Name}, angle = {desiredAngle}, range = ({_angleRange.x}, {_angleRange.y})");
     }
 
-    public void TryResolution()
+    public void CheckLevelCompletion()
     {
         float angle = PinManager.Instance.PinAngle;
-        if (TrySelectedAngle(angle))
+        if (angle >= _angleRange.x && angle <= _angleRange.y)
         {
             Debug.Log($"Angle {angle} is in the range, level completed!");
+            PinManager.Instance.ResetPinRotation();            
             SetNextLevel();
+            // animation/feedback
         }
         else
         {
             Debug.Log($"Angle {angle} is not in the range, try again!");
+            // animation/feedback
         }
-    }
-
-    private bool TrySelectedAngle(float angle)
-    {
-        return angle >= _angleRange.x && angle <= _angleRange.y;
     }
 }

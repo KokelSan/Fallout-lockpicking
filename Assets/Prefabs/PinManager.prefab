@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pin: {fileID: 0}
-  rotationSlider: {fileID: 0}
+  pinRotationSpeed: 7

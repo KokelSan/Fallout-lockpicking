@@ -14,6 +14,6 @@ public class InputManager : MonoBehaviour
 
     public void OnTryUnlock(InputValue value)
     {
-        GameManager.Instance.TryResolution();
+        GameManager.Instance.CheckLevelCompletion();
     }
 }

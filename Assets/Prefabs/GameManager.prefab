@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels: {fileID: 11400000, guid: d6224bf3c23ffb448ac4a26db07d4ccc, type: 2}
+  validationButton: {fileID: 0}
