@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnRotatePin(InputValue value)
     {
-        
+        Vector2 delta = value.Get<Vector2>();
+        if (delta.x != 0)
+        {
+            PinManager.Instance.RotatePin(-delta.x);
+        }       
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnTryUnlock(InputValue value)
     {
-        
+        GameManager.Instance.TryResolution();
     }
 }

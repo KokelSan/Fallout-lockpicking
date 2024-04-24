@@ -55,9 +55,9 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Starting new level: difficulty = {difficulty.Name}, angle = {desiredAngle}, rangeWidth = {angleRangeWidth}");
     }
 
-    private void TryResolution()
+    public void TryResolution()
     {
-        float angle = PinManager.Instance.GetPinAngle();
+        float angle = PinManager.Instance.PinAngle;
         if (TrySelectedAngle(angle))
         {
             Debug.Log($"Angle {angle} is in the range, level completed!");
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool TrySelectedAngle(float angle)
+    private bool TrySelectedAngle(float angle)
     {
         return angle >= _angleRange.x && angle <= _angleRange.y;
     }

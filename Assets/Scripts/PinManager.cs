@@ -1,12 +1,14 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PinManager : MonoBehaviour
 {
     public static PinManager Instance;
 
     [SerializeField] private RectTransform pin;
-    [SerializeField] private Slider rotationSlider;
+    [SerializeField] private float pinRotationSpeed;
+
+    public float PinAngle => _currentPinRotation;
+    private float _currentPinRotation;
 
     private void Awake()
     {
@@ -18,18 +20,11 @@ public class PinManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    public void RotatePin(float mouseDelta)
     {
-        rotationSlider.onValueChanged.AddListener(UpdatePinRotation);
-    }
-
-    public void UpdatePinRotation(float newZRotation)
-    {
-        pin.eulerAngles = new Vector3(0, 0, -newZRotation);
-    }
-
-    public float GetPinAngle()
-    {
-        return rotationSlider.value;
+        float newRotation = -_currentPinRotation + mouseDelta * Time.deltaTime * pinRotationSpeed;
+        newRotation = Mathf.Clamp(newRotation, -90, 90);  
+        pin.eulerAngles = new Vector3(0, 0, newRotation);
+        _currentPinRotation = - newRotation;
     }
 }
