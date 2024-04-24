@@ -47,12 +47,12 @@ public class GameManager : MonoBehaviour
     private void ComputeAngleForLevel()
     {
         DifficultyDefinitionSO difficulty = levels.Levels[_currentLevelIndex];        
-        float desiredAngle = Random.Range(-90, 90);
+        float desiredAngle = Random.Range(-90f, 90f);
         float angleRangeWidth = difficulty.AngleRangeWidth;
-        _angleRange.x = desiredAngle - angleRangeWidth;
-        _angleRange.y = desiredAngle + angleRangeWidth;
+        _angleRange.x = desiredAngle - angleRangeWidth / 2;
+        _angleRange.y = desiredAngle + angleRangeWidth / 2;
 
-        Debug.Log($"Starting new level: difficulty = {difficulty.Name}, angle = {desiredAngle}, rangeWidth = {angleRangeWidth}");
+        Debug.Log($"Starting new level: difficulty = {difficulty.Name}, angle = {desiredAngle}, range = ({_angleRange.x}, {_angleRange.y})");
     }
 
     public void TryResolution()
