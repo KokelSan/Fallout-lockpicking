@@ -902,7 +902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6959833571161072446, guid: de2562b9b37588448ba02aec881b031d, type: 3}
       propertyPath: pinRotationSpeed
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
